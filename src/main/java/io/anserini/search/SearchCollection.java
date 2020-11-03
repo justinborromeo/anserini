@@ -556,7 +556,7 @@ public final class SearchCollection implements Closeable {
         query = generator.buildQuery(IndexArgs.CONTENTS, analyzer, queryString);
       } catch (Exception e) {
         e.printStackTrace();
-        throw new IllegalArgumentException("Unable to load QueryGenerator: " + args.topicReader);
+        throw new IllegalArgumentException("Unable to load QueryGenerator: " + args.queryGenerator);
       }
     }
 
@@ -642,7 +642,7 @@ public final class SearchCollection implements Closeable {
         keywordQuery = generator.buildQuery(IndexArgs.CONTENTS, analyzer, queryString);
       } catch (Exception e) {
         e.printStackTrace();
-        throw new IllegalArgumentException("Unable to load QueryGenerator: " + args.topicReader);
+        throw new IllegalArgumentException("Unable to load QueryGenerator: " + args.queryGenerator);
       }
     }
     List<String> queryTokens = AnalyzerUtils.analyze(analyzer, queryString);
