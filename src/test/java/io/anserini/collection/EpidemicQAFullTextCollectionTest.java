@@ -9,13 +9,13 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EpidemicQACollectionTest  extends DocumentCollectionTest<EpidemicQACollection.Document> {
+public class EpidemicQAFullTextCollectionTest  extends DocumentCollectionTest<EpidemicQAFullTextCollection.Document> {
   @Before
   public void setUp() throws Exception {
     super.setUp();
 
     collectionPath = Paths.get("src/test/resources/sample_docs/epidemic_qa");
-    collection = new EpidemicQACollection(collectionPath);
+    collection = new EpidemicQAFullTextCollection(collectionPath);
 
     Path segment_1 = Paths.get("src/test/resources/sample_docs/epidemic_qa/b5329o75.json");
     Path segment_2 = Paths.get("src/test/resources/sample_docs/epidemic_qa/f2e3910c8f67647e4ac24eb38e9cb86e9c3cbf27.json");
@@ -53,7 +53,7 @@ public class EpidemicQACollectionTest  extends DocumentCollectionTest<EpidemicQA
 
   @Override
   void checkDocument(SourceDocument doc, Map<String, String> expected) {
-    EpidemicQACollection.Document covidDoc = (EpidemicQACollection.Document) doc;
+    EpidemicQAFullTextCollection.Document covidDoc = (EpidemicQAFullTextCollection.Document) doc;
 
     assertEquals(expected.get("id"), covidDoc.id());
     assertTrue(covidDoc.contents().startsWith(expected.get("contents_starts_with")));

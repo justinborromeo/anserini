@@ -17,8 +17,7 @@
 package io.anserini.index.generator;
 
 import io.anserini.analysis.DefaultEnglishAnalyzer;
-import io.anserini.collection.Cord19BaseDocument;
-import io.anserini.collection.EpidemicQACollection;
+import io.anserini.collection.EpidemicQAFullTextCollection;
 import io.anserini.index.IndexArgs;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.CharArraySet;
@@ -35,9 +34,9 @@ import org.apache.lucene.util.BytesRef;
 import java.io.StringReader;
 
 /**
- * Converts a {@link EpidemicQACollection.Document} into a Lucene {@link Document}, ready to be indexed.
+ * Converts a {@link EpidemicQAFullTextCollection.Document} into a Lucene {@link Document}, ready to be indexed.
  */
-public class EpidemicQAGenerator implements LuceneDocumentGenerator<EpidemicQACollection.Document> {
+public class EpidemicQAFullTextGenerator implements LuceneDocumentGenerator<EpidemicQAFullTextCollection.Document> {
   private IndexArgs args;
 
   // From the schema at https://bionlp.nlm.nih.gov/epic_qa/#collection.
@@ -55,12 +54,12 @@ public class EpidemicQAGenerator implements LuceneDocumentGenerator<EpidemicQACo
     }
   }
 
-  public EpidemicQAGenerator(IndexArgs args) {
+  public EpidemicQAFullTextGenerator(IndexArgs args) {
     this.args = args;
   }
 
   @Override
-  public Document createDocument(EpidemicQACollection.Document covidDoc) throws GeneratorException {
+  public Document createDocument(EpidemicQAFullTextCollection.Document covidDoc) throws GeneratorException {
     String id = covidDoc.id();
     String content = covidDoc.contents();
     String raw = covidDoc.raw();

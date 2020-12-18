@@ -34,24 +34,24 @@ import java.util.Set;
 /**
  * A document collection for the Epidemic QA dataset (https://bionlp.nlm.nih.gov/epic_qa/).
  */
-public class EpidemicQACollection extends DocumentCollection<EpidemicQACollection.Document> {
-  private static final Logger LOG = LogManager.getLogger(EpidemicQACollection.class);
+public class EpidemicQAFullTextCollection extends DocumentCollection<EpidemicQAFullTextCollection.Document> {
+  private static final Logger LOG = LogManager.getLogger(EpidemicQAFullTextCollection.class);
 
-  public EpidemicQACollection(Path path){
+  public EpidemicQAFullTextCollection(Path path){
     this.path = path;
     // Documents are stored in JSON files (1 document/JSON file).
     this.allowedFileSuffix = Set.of(".json");
   }
 
   @Override
-  public FileSegment<EpidemicQACollection.Document> createFileSegment(Path p) throws IOException {
+  public FileSegment<EpidemicQAFullTextCollection.Document> createFileSegment(Path p) throws IOException {
     return new Segment(p);
   }
 
   /**
    * A single JSON file containing a document.
    */
-  public class Segment extends FileSegment<EpidemicQACollection.Document> {
+  public class Segment extends FileSegment<EpidemicQAFullTextCollection.Document> {
     public Segment(Path path) throws IOException {
       super(path);
       this.bufferedReader = new BufferedReader(new InputStreamReader(
@@ -74,7 +74,7 @@ public class EpidemicQACollection extends DocumentCollection<EpidemicQACollectio
         throw new NoSuchElementException();
       }
 
-      bufferedRecord = new EpidemicQACollection.Document(documentJSON);
+      bufferedRecord = new EpidemicQAFullTextCollection.Document(documentJSON);
       atEOF = true;
     }
 
@@ -149,7 +149,7 @@ public class EpidemicQACollection extends DocumentCollection<EpidemicQACollectio
             content += "\n" + node.get("text").asText();
           }
         } catch (IOException e) {
-          LOG.error("Error parsing file at " + EpidemicQACollection.this.path.toString() + "/" + this.documentID
+          LOG.error("Error parsing file at " + EpidemicQAFullTextCollection.this.path.toString() + "/" + this.documentID
                     + "\n" + e.getMessage());
         }
       }
